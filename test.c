@@ -1,40 +1,40 @@
 #include <stdio.h>
-
+#include <unistd.h>
 int	min(int a, int b, int c)
 {
-	int sol;
-	if((a<b && a<c)	|| (a == c && a < b))	
-		sol = a;
-	else if((b<c && b<a) || (b == a && b < c))
-		sol = b;
+	if ((a < b && a < c) || (a == c && a < b))
+		return (a);
+	else if ((b < c && b < a) || (b == a && b < c))
+		return(b);
 	else
-		sol = c;
+		return(c);
 }
 
-void	convert(int **i)
+void	convert(int i[5][5])
 {
 	int x;
 	int y;
-	int **set;
+	int set[5][5];
 
 	x = 0;
 	y = 0;
 
-	while (1 == 1)
+	while (i[x][y] == 0 || i[x][y] == 1)
 	{
-		printf("-");
-		if (i[0][y] == 0)
+		printf(" ");
+		if (i[x][y] == 0)
 			set[x][y] = i[x][y];
-		else  
+		else 
 			set[x][y] = ((min(set[x][y - 1], set[x - 1][y], set[x - 1][y - 1]) + 1));
 		printf("%i", set[x][y]);
-	//	if (i[x][y] != '\0')
-	//	{
-	//		break;
-	//	}
+		if (y == 4)
+		{
+			x++;
+			printf("\n");
+			y = -1;
+		}
 		y++;
 	}
-	set[x][y] = '\0';
 }
 
 int		main(void)
