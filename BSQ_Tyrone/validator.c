@@ -93,7 +93,6 @@ int	ft_check_valid_char(char *str)
 		if (str[i] != '\n' && str[i] != e && str[i] != o
 			&& str[i] != s && str[i] != '\0')
 		{
-			printf("empty: %c obs: %c sq: %c str[i]: %c\n", e, o , s, str[i]);
 			return (0);
 		}
 		i++;
