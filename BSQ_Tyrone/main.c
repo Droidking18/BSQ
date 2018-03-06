@@ -4,6 +4,7 @@
 #include "utility.h"
 #include "validator.h"
 #include "converter.h"
+#include "solver.h"
 #define BUFF_SIZE 100000000
 
 int	main(void)
@@ -19,6 +20,7 @@ int	main(void)
 		|| !ft_get_rows(str))
 	{
 		printf("map error\n");
+		return (0);
 	}
 
 	grid = (int**)malloc(sizeof(int*) * (ft_get_rows(str) + 1));
@@ -30,7 +32,7 @@ int	main(void)
 	}
 	ft_pad_grid(grid, str);
 	ft_fill_int_grid(grid, str);
-
+	convert(grid, ft_get_rows(str), ft_check_map_length(str));
 	i = 0;
 	j = 0;
 	while (i < ft_get_rows(str) + 1)
@@ -44,7 +46,7 @@ int	main(void)
 		i++;
 		j = 0;
 	}
-
+	
 
 	free(str);
 	free(grid);
