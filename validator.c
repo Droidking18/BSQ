@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkaplan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/07 10:17:51 by dkaplan           #+#    #+#             */
+/*   Updated: 2018/03/07 10:18:28 by dkaplan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utility.h"
 #include "validator.h"
 #include "converter.h"
@@ -13,7 +25,7 @@ int	ft_count_line_length(char *str, int *i)
 		counter++;
 		(*i)++;
 	}
-	(*i)++;			//change i by reference to start of new line or null for the end of the map
+	(*i)++;
 	return (counter);
 }
 
@@ -23,8 +35,8 @@ int	ft_get_rows(char *str)
 	int i;
 	int counter;
 
-	row = ft_atoi(str);			//get number of rows from file start
-	i = ft_find_map_start(str);		//and check that rows match \n's
+	row = ft_atoi(str);
+	i = ft_find_map_start(str);
 	counter = 0;
 	while (str[i] != '\0')
 	{
@@ -44,11 +56,11 @@ int	ft_check_map_length(char *str)
 	int line_length;
 	int check_length;
 
-	i = ft_find_map_start(str);			//start at the beginning of map
+	i = ft_find_map_start(str);
 	line_length = ft_count_line_length(str, &i);
 	while (str[i] != '\0')
 	{
-		check_length = ft_count_line_length(str, &i);	//check each line for same length
+		check_length = ft_count_line_length(str, &i);
 		if (check_length != line_length)
 			return (0);
 	}
@@ -57,11 +69,11 @@ int	ft_check_map_length(char *str)
 
 int	ft_check_free_space(char *str)
 {
-	char e;
-	char o;
-	char s;
-	int i;
-	int free_space;
+	char	e;
+	char	o;
+	char	s;
+	int		i;
+	int		free_space;
 
 	ft_find_valid_char(str, &e, &o, &s);
 	i = ft_find_map_start(str);
@@ -69,7 +81,7 @@ int	ft_check_free_space(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == e)
-			free_space = 1;			//check whether at least 1 cell has a empty
+			free_space = 1;
 		i++;
 	}
 	if (free_space)
@@ -78,13 +90,12 @@ int	ft_check_free_space(char *str)
 		return (0);
 }
 
-
 int	ft_check_valid_char(char *str)
 {
-	char e;
-	char o;					//checks whether each cell contains only \n, e, o or s
-	char s;					//maybe only check \n e or o .... not s as well
-	int i;
+	char	e;
+	char	o;
+	char	s;
+	int		i;
 
 	i = ft_find_map_start(str);
 	ft_find_valid_char(str, &e, &o, &s);
