@@ -1,2 +1,0 @@
-# BSQ
-Resources for BSQ
