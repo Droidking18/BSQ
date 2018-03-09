@@ -6,13 +6,13 @@
 /*   By: dkaplan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:12:34 by dkaplan           #+#    #+#             */
-/*   Updated: 2018/03/07 10:15:37 by dkaplan          ###   ########.fr       */
+/*   Updated: 2018/03/09 10:16:39 by dkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int		min(int a, int b, int c)
 {
@@ -50,8 +50,8 @@ int		*largest_number(int **grid, int row, int col)
 	int y;
 	int *largest;
 
-	x = 1;
-	y = 1;
+	x = 0;
+	y = 0;
 	largest = (int*)malloc(sizeof(int) * 3);
 	largest[0] = grid[x][y];
 	while (x < row + 1)
@@ -79,17 +79,18 @@ void	solver(int **grid, int row, int col, int *largest)
 
 	x = 1;
 	y = 1;
+
 	while (x < row + 1)
 	{
 		while (y < col + 1)
 		{
 			if ((y <= largest[2] && y > largest[2] - largest[0])
 					&& (x <= largest[1] && x > largest[1] - largest[0]))
-				write(1, " x", 2);
+				write(1, "x", 1);
 			else if (grid[x][y] == 0)
-				write(1, " o", 2);
+				write(1, "o", 1);
 			else
-				write(1, " .", 2);
+				write(1, ".", 1);
 			y++;
 		}
 		write(1, "\n", 1);

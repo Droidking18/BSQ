@@ -6,23 +6,27 @@
 /*   By: dkaplan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:17:33 by dkaplan           #+#    #+#             */
-/*   Updated: 2018/03/07 10:17:35 by dkaplan          ###   ########.fr       */
+/*   Updated: 2018/03/09 08:37:33 by dkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utility.h"
 #include "validator.h"
-#include <stdio.h>
+#include <unistd.h>
 
-int	ft_isdigit(char c)
+void	ft_putstr(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
-int	ft_atoi(char *str)
+int		ft_atoi(char *str)
 {
 	int total;
 	int sign;
@@ -41,7 +45,7 @@ int	ft_atoi(char *str)
 		i++;
 		return (0);
 	}
-	while (ft_isdigit(str[i]))
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		total *= 10;
 		total += str[i] - '0';
@@ -50,7 +54,7 @@ int	ft_atoi(char *str)
 	return (total * sign);
 }
 
-int	ft_find_map_start(char *str)
+int		ft_find_map_start(char *str)
 {
 	int i;
 
@@ -63,19 +67,35 @@ int	ft_find_map_start(char *str)
 	return (i);
 }
 
-int	ft_find_valid_char(char *str, char *empty, char *obs, char *square)
+int		ft_find_valid_char(char *str)
 {
 	int i;
 
 	i = 0;
-	while (ft_isdigit(str[i]))
+	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '.' && str[i + 1] == 'o' && str[i + 2] == 'x')
 	{
-		*empty = '.';
-		*obs = 'o';
-		*square = 'x';
 		return (1);
 	}
 	return (0);
+}
+
+char	*ft_strcat(char *dest, char *src)
+{
+	int i;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[k] != '\0')
+	{
+		dest[i] = src[k];
+		i++;
+		k++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

@@ -6,21 +6,20 @@
 /*   By: dkaplan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:17:51 by dkaplan           #+#    #+#             */
-/*   Updated: 2018/03/07 10:18:28 by dkaplan          ###   ########.fr       */
+/*   Updated: 2018/03/08 18:11:52 by tstephen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utility.h"
 #include "validator.h"
 #include "converter.h"
-#include <stdio.h>
 
-int	ft_count_line_length(char *str, int *i)
+int		ft_count_line_length(char *str, int *i)
 {
 	int counter;
 
 	counter = 0;
-	while (str[*i] != '\n')
+	while (str[*i] && str[*i] != '\n')
 	{
 		counter++;
 		(*i)++;
@@ -29,7 +28,7 @@ int	ft_count_line_length(char *str, int *i)
 	return (counter);
 }
 
-int	ft_get_rows(char *str)
+int		ft_get_rows(char *str)
 {
 	int row;
 	int i;
@@ -50,7 +49,7 @@ int	ft_get_rows(char *str)
 		return (row);
 }
 
-int	ft_check_map_length(char *str)
+int		ft_check_map_length(char *str)
 {
 	int i;
 	int line_length;
@@ -67,21 +66,21 @@ int	ft_check_map_length(char *str)
 	return (line_length);
 }
 
-int	ft_check_free_space(char *str)
+int		ft_check_free_space(char *str)
 {
-	char	e;
-	char	o;
-	char	s;
 	int		i;
 	int		free_space;
 
-	ft_find_valid_char(str, &e, &o, &s);
+	ft_find_valid_char(str);
 	i = ft_find_map_start(str);
 	free_space = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == e)
+		if (str[i] == '.')
+		{
 			free_space = 1;
+			break ;
+		}
 		i++;
 	}
 	if (free_space)
@@ -90,15 +89,18 @@ int	ft_check_free_space(char *str)
 		return (0);
 }
 
-int	ft_check_valid_char(char *str)
+int		ft_check_valid_char(char *str)
 {
 	char	e;
 	char	o;
 	char	s;
 	int		i;
 
+	e = '.';
+	o = 'o';
+	s = 'x';
 	i = ft_find_map_start(str);
-	ft_find_valid_char(str, &e, &o, &s);
+	ft_find_valid_char(str);
 	while (str[i] != '\0')
 	{
 		if (str[i] != '\n' && str[i] != e && str[i] != o
